@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ifediora Precious Chidiebere — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .controls {
+      margin-bottom: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      background: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,0.15); }
+    .btn-primary { background: #fff; color: #000; }
+    .btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+
+    .resume {
+      width: 210mm;
+      min-height: 296mm;
+      background: #ffffff;
+      padding: 40px 44px;
+      position: relative;
+      box-shadow: 0 0 60px rgba(255,255,255,0.05);
+      border-radius: 4px;
+      line-height: 1.5;
+      color: #222;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #000;
+    }
+    .header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #000;
+    }
+    .header h1 span {
+      font-weight: 400;
+      font-size: 16px;
+      display: block;
+      color: #555;
+      letter-spacing: 0;
+      margin-top: 4px;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 11px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .header-right a { color: #333; text-decoration: none; }
+    .header-right a:hover { text-decoration: underline; }
+
+    /* Section */
+    .section { margin-bottom: 22px; }
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #000;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 12.5px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px 0;
+      font-size: 12px;
+    }
+    .skill-cat {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+    .skill-cat strong {
+      font-size: 11.5px;
+      color: #000;
+      margin-right: 4px;
+    }
+    .skill-cat span {
+      color: #555;
+    }
+
+    /* Experience */
+    .exp-item {
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .exp-header h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #000;
+    }
+    .exp-header .date {
+      font-size: 11px;
+      color: #888;
+      white-space: nowrap;
+    }
+    .exp-sub {
+      font-size: 12px;
+      color: #666;
+      margin-top: 1px;
+    }
+    .exp-item ul {
+      padding-left: 16px;
+      margin-top: 4px;
+    }
+    .exp-item li {
+      font-size: 11.5px;
+      color: #555;
+      margin-bottom: 2px;
+    }
+
+    /* Education */
+    .edu-item {
+      margin-bottom: 10px;
+    }
+    .edu-item h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #000;
+    }
+    .edu-item .detail {
+      font-size: 12px;
+      color: #666;
+    }
+    .edu-item .note {
+      font-size: 11px;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+    }
+    .proj-item h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #000;
+    }
+    .proj-item p {
+      font-size: 11px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* Bottom row */
+    .bottom-row {
+      display: flex;
+      gap: 40px;
+      margin-top: 4px;
+    }
+    .bottom-col { flex: 1; }
+
+    .print-note {
+      text-align: center;
+      color: #666;
+      font-size: 11px;
+      margin-top: 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .controls { display: none; }
+      .resume { box-shadow: none; border-radius: 0; }
+      .print-note { display: none; }
+      @page { margin: 0; size: A4; }
+    }
+
+    @media (max-width: 800px) {
+      .resume { width: 100%; padding: 24px; }
+      .header { flex-direction: column; gap: 8px; }
+      .header-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <button class="btn btn-primary" onclick="downloadPDF()">⬇ Download PDF</button>
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Print / Save as PDF</button>
+  </div>
+
+  <div class="resume" id="resume">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <h1>Ifediora Precious<br />Chidiebere</h1>
+        <span>Frontend Developer</span>
+      </div>
+      <div class="header-right">
+        Gwagwalada, Abuja, Nigeria<br />
+        <a href="mailto:nexusauth0@gmail.com">nexusauth0@gmail.com</a><br />
+        08082563629 / 08135692333<br />
+        <a href="https://github.com/nexusauth0-cloud">github.com/nexusauth0-cloud</a><br />
+        <a href="https://instagram.com/ifediorapreciouschidiebere">instagram.com/ifediorapreciouschidiebere</a>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="section">
+      <div class="section-title">Professional Summary</div>
+      <p class="summary-text">
+        Self-taught Frontend Developer with 3+ years of experience building modern, performant web applications. 
+        Currently pursuing a B.Sc. in Computer Science at the University of Abuja. Proficient in React, TypeScript, 
+        Next.js, and modern CSS with a passion for creating immersive digital experiences using Three.js, GSAP, 
+        and Framer Motion. Known for translating complex design concepts into clean, responsive, and accessible code.
+      </p>
+    </div>
+
+    <!-- Skills -->
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-grid">
+        <div class="skill-cat"><strong>Frontend:</strong> <span>React, Next.js, TypeScript, JavaScript, HTML5/CSS3, Tailwind CSS</span></div>
+        <div class="skill-cat"><strong>Animation & 3D:</strong> <span>Three.js, GSAP, Framer Motion, WebGL</span></div>
+        <div class="skill-cat"><strong>Backend & Database:</strong> <span>Node.js, Express.js, MongoDB, PostgreSQL, REST APIs</span></div>
+        <div class="skill-cat"><strong>DevOps & Tools:</strong> <span>Docker, AWS, Git, CI/CD, GitHub Actions, Vite</span></div>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="section">
+      <div class="section-title">Work Experience</div>
+      
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>Frontend Developer (Freelance)</h3>
+          <span class="date">2022 – Present</span>
+        </div>
+        <ul>
+          <li>Built modern web applications for diverse clients using React, Next.js, and Tailwind CSS</li>
+          <li>Implemented pixel-perfect UIs from Figma designs with a focus on performance and accessibility</li>
+          <li>Developed interactive 3D experiences using Three.js and scroll-based animations with GSAP</li>
+          <li>Delivered projects on time with clear client communication throughout the development cycle</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <h3>Assistant Instructor</h3>
+          <span class="date">Aug 2021 – Jan 2025</span>
+        </div>
+        <div class="exp-sub">Click &amp; Smile — Abuja, Nigeria</div>
+        <ul>
+          <li>Assisted in teaching and mentoring students in computer fundamentals and digital literacy</li>
+          <li>Developed instructional materials and practice exercises to reinforce learning</li>
+          <li>Provided one-on-one support to students, improving overall class performance</li>
+          <li>Gained strong communication, patience, and leadership skills working with diverse learners</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="edu-item">
+        <h3>University of Abuja</h3>
+        <div class="detail">B.Sc. in Computer Science — Gwagwalada, Abuja</div>
+        <div class="note">Currently enrolled (100 Level)</div>
+      </div>
+      <div class="edu-item">
+        <h3>Self-Taught Development</h3>
+        <div class="detail">Completed numerous online courses, tutorials, and real-world projects spanning React, Node.js, Three.js, and modern web technologies</div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section">
+      <div class="section-title">Featured Projects</div>
+      <div class="projects-grid">
+        <div class="proj-item">
+          <h4>Kings Cut</h4>
+          <p>Premium barbershop landing page with editorial aesthetic.<br /><a href="https://kings-cut-sepia.vercel.app/" style="color:#555;font-size:10px;">Live Demo</a></p>
+        </div>
+        <div class="proj-item">
+          <h4>Calc Pro</h4>
+          <p>PWA calculator + unit converter with 12 tools, 22 currencies, 6 themes.<br /><a href="https://calc-pro-mu.vercel.app/" style="color:#555;font-size:10px;">Live Demo</a></p>
+        </div>
+        <div class="proj-item">
+          <h4>Glow Studio</h4>
+          <p>Luxury nail salon landing page with premium brand identity.<br /><a href="https://glow-studio-one.vercel.app/" style="color:#555;font-size:10px;">Live Demo</a></p>
+        </div>
+        <div class="proj-item">
+          <h4>NexusAuth</h4>
+          <p>Secure auth solutions portfolio with modern UI/UX design.<br /><a href="https://nexusauth0-cloud.github.io/nexusauth/#home" style="color:#555;font-size:10px;">Live Demo</a></p>
+        </div>
+        <div class="proj-item">
+          <h4>Marcus Ellis Site</h4>
+          <p>Personal brand page with clean minimalist design.<br /><a href="https://marcus-ellis-site.vercel.app/" style="color:#555;font-size:10px;">Live Demo</a></p>
+        </div>
+        <div class="proj-item">
+          <h4>StudyGroup Organizer</h4>
+          <p>Collaborative study group platform for students.<br /><a href="https://studygroup-organizer.vercel.app/" style="color:#555;font-size:10px;">Live Demo</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="bottom-row">
+      <div class="bottom-col">
+        <div class="section-title" style="margin-bottom:4px;">Languages</div>
+        <p style="font-size:12px;color:#555;">English (Fluent)</p>
+      </div>
+      <div class="bottom-col">
+        <div class="section-title" style="margin-bottom:4px;">Interests</div>
+        <p style="font-size:12px;color:#555;">Web Development, UI/UX Design, Open Source, 3D Graphics, Problem Solving</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="print-note">Use the "Print / Save as PDF" button above, or click "Download PDF" for a one-click download.</p>
+
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('resume')
+      const btn = document.querySelector('.btn-primary')
+      btn.textContent = 'Generating PDF...'
+      btn.disabled = true
+
+      html2canvas(element, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        width: element.scrollWidth,
+        height: element.scrollHeight,
+        windowWidth: element.scrollWidth,
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png')
+        const { jsPDF } = window.jspdf
+        const pdf = new jsPDF('p', 'mm', 'a4')
+        const pdfWidth = 210
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width
+
+        let heightLeft = pdfHeight
+        let position = 0
+        const pageHeight = 297
+
+        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight)
+        heightLeft -= pageHeight
+
+        while (heightLeft > 0) {
+          position = heightLeft - pdfHeight
+          pdf.addPage()
+          pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight)
+          heightLeft -= pageHeight
+        }
+
+        pdf.save('Ifediora_Precious_Resume.pdf')
+        btn.textContent = '⬇ Download PDF'
+        btn.disabled = false
+      }).catch(() => {
+        // fallback: open print dialog
+        window.print()
+        btn.textContent = '⬇ Download PDF'
+        btn.disabled = false
+      })
+    }
+  </script>
+</body>
+</html>
