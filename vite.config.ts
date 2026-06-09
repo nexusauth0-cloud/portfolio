@@ -10,7 +10,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.svg', 'icon-192.svg'],
       manifest: {
         name: "Ifediora Precious Chidiebere | Frontend Developer",
         short_name: "Precious.Dev",
@@ -22,6 +22,12 @@ export default defineConfig({
           {
             src: "/favicon.svg",
             sizes: "any",
+            type: "image/svg+xml",
+            purpose: "any maskable",
+          },
+          {
+            src: "/icon-192.svg",
+            sizes: "192x192",
             type: "image/svg+xml",
             purpose: "any maskable",
           },
