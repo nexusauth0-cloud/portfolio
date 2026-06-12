@@ -78,6 +78,16 @@ const projectsData: Project[] = [
     topics: ['React', 'TypeScript', 'Collaboration', 'Education'],
     screenshot: null,
   },
+  {
+    id: 7,
+    name: 'PresentFoods',
+    description: 'A modern, mouthwatering food ordering and discovery platform that brings restaurant-quality meals straight to your doorstep. Features an intuitive menu browsing experience, seamless ordering flow, and responsive design optimized for both mobile and desktop. Built with performance and user experience at its core — fast load times, smooth navigation, and a clean interface that makes food selection feel effortless.',
+    language: 'TypeScript',
+    html_url: 'https://github.com/nexusauth0-cloud/presentfoods',
+    live_url: 'https://presentfoods.vercel.app/',
+    topics: ['React', 'TypeScript', 'Food', 'Ordering', 'Responsive'],
+    screenshot: null,
+  },
 ]
 
 const Projects = () => {
