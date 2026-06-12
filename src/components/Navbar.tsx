@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FiMenu, FiX, FiChevronRight } from 'react-icons/fi'
 
@@ -15,15 +15,8 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!isHome) { window.location.href = href; return }
@@ -39,10 +32,10 @@ const Navbar = () => {
         position: 'fixed',
         top: 0,
         width: '100%',
-        background: scrolled ? 'rgba(0,0,0,0.75)' : 'transparent',
+        background: 'rgba(0,0,0,0.92)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
         zIndex: 100,
         padding: '0 24px',
         height: 68,
@@ -135,7 +128,7 @@ const Navbar = () => {
             position: 'fixed',
             inset: 0,
             top: 68,
-            background: 'rgba(0,0,0,0.96)',
+            background: '#000000',
             backdropFilter: 'blur(30px)',
             WebkitBackdropFilter: 'blur(30px)',
             display: 'flex',
