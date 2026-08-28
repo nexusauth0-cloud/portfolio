@@ -61,11 +61,11 @@ const projectsData: Project[] = [
   {
     id: 5,
     name: 'NexusAuth',
-    description: 'A sleek, responsive portfolio showcasing secure web solutions and modern UI/UX design. NexusAuth represents the intersection of robust authentication and seamless user experience — demonstrating expertise in building secure, user-friendly web interfaces with contemporary design principles and clean, maintainable code.',
+    description: 'A sleek, responsive personal portfolio landing page built with HTML, CSS, and vanilla JavaScript. Features an animated hero, about section, skills, and contact links — a clean demonstration of modern UI/UX design principles and lightweight, dependency-free frontend engineering.',
     language: 'CSS',
     html_url: 'https://github.com/nexusauth0-cloud/nexusauth',
     live_url: 'https://nexusauth0-cloud.github.io/nexusauth/#home',
-    topics: ['Authentication', 'UI/UX', 'Responsive', 'Portfolio'],
+    topics: ['HTML5', 'CSS3', 'JavaScript', 'Responsive', 'Portfolio'],
     screenshot: null,
   },
   {
@@ -73,7 +73,7 @@ const projectsData: Project[] = [
     name: 'StudyGroup Organizer',
     description: 'A collaborative study group management tool designed to streamline academic coordination. Helps students organize study sessions, track progress, share resources, and communicate effectively within groups. Built with a focus on clean UI and intuitive workflows — making group study planning as seamless as possible for university students juggling multiple courses and deadlines.',
     language: 'TypeScript',
-    html_url: 'https://github.com/nexusauth0-cloud/studygroup-organizer',
+    html_url: 'https://github.com/nexusauth0-cloud/study-group-organizer',
     live_url: 'https://study-group-organizer.onrender.com',
     topics: ['React', 'TypeScript', 'Collaboration', 'Education'],
     screenshot: null,
